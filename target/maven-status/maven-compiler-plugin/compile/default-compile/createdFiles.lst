@@ -1,0 +1,7 @@
+com\petrograd\messageBoard\util\MessageBoardData.class
+com\petrograd\messageBoard\dao\MessageBoardMapper.class
+com\petrograd\messageBoard\service\impl\MessageBoardServiceImpl.class
+com\petrograd\messageBoard\util\Iso_8859_1_to_Utf_8_Util.class
+com\petrograd\messageBoard\service\MessageBoardService.class
+com\petrograd\messageBoard\entity\MessageBoard.class
+com\petrograd\messageBoard\controller\MessageBoardController.class

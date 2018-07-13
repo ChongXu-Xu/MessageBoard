@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 数据库字段名下划线  变化  为JavaBean的驼峰 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<!-- 懒加载开启设置 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 开启缓存配置 -->
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+	
+	<!-- databaseIdProvider 多数据库厂商 type="DB_VENDOR“：VendorDatabaseIdProvider
+		根据数据库驱动.getDatabaseProductName()获得数据库名-->
+	<databaseIdProvider type="DB_VENDOR">
+		<property name="MySQL" value="mysql"/>
+		<property name="Oracle" value="oracle"/>
+		<property name="SQL Server" value="sqlserver"/>
+	</databaseIdProvider>
+	
+</configuration>
