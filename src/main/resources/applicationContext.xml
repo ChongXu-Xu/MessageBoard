@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
@@ -24,23 +21,23 @@
         http://mybatis.org/schema/mybatis-spring 
 		http://mybatis.org/schema/mybatis-spring.xsd">
 
-	<context:component-scan
-		base-package="com.petrograd.messageBoard">
+	<context:component-scan base-package="com.petrograd.messageBoard">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	<!-- <aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
 
-	<context:property-placeholder
-		location="classpath:db.properties" />
-		
+	<context:property-placeholder location="classpath:db.properties" />
+
 	<!-- Spring控制业务逻辑：数据源、事务控制、AOP -->
-	<bean id="dataSource"
-		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="jdbcUrl" value="${mysql.url}" />
 		<property name="driverClass" value="${mysql.driver}" />
 		<property name="user" value="${mysql.username}" />
 		<property name="password" value="${mysql.password}" />
+		<property name="preferredTestQuery" value="SELECT 1" />
+		<property name="idleConnectionTestPeriod" value="18000" />
+		<property name="testConnectionOnCheckout" value="true" />
 	</bean>
 
 	<!-- spring事务管理 -->
@@ -51,20 +48,20 @@
 	<tx:annotation-driven></tx:annotation-driven>
 
 	<!-- 整合mybatis -->
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- mybatis配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<!-- 制定mapper位置 -->
-		<property name="mapperLocations" value="classpath:com/petrograd/messageBoard/mapper/*.xml"></property>
+		<property name="mapperLocations"
+			value="classpath:com/petrograd/messageBoard/mapper/*.xml"></property>
 	</bean>
-	<!-- 加載對應mapper的接口 
-	<mybatis:scan base-package="com.mybatis.dao"></mybatis:scan>-->
-	
-	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="com.petrograd.messageBoard.dao" />  
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
-        <!-- <property name="annotationClass" value="com.msyd.framework.common.persistence.annotation.MyBatisDao" /> -->  
-    </bean>
+	<!-- 加載對應mapper的接口 <mybatis:scan base-package="com.mybatis.dao"></mybatis:scan> -->
+
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.petrograd.messageBoard.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<!-- <property name="annotationClass" value="com.msyd.framework.common.persistence.annotation.MyBatisDao" 
+			/> -->
+	</bean>
 </beans>
